@@ -57,9 +57,10 @@ class LED extends React.Component {
 		this.onPulseSubmit = this.onPulseSubmit.bind(this);
 		this.onCustomCancel = this.onCustomCancel.bind(this);
 		this.onCustomSubmit = this.onCustomSubmit.bind(this);
+		this.onPatternStop = this.onPatternStop.bind(this);
 	}
 
-	onColorClicked({rgb}) {
+	onColorClicked({ rgb }) {
 		this.socket.emit('color', rgb);
 	}
 
@@ -154,17 +155,21 @@ class LED extends React.Component {
 		});
 	}
 
+	onPatternStop() {
+		this.socket.emit('pattern stop');
+	}
+
 	render() {
 		const { classes } = this.props;
 		const { currentPattern, selectedColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
-		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${selectedColor.r},${selectedColor.g},${selectedColor.b})`}
+		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${selectedColor.r},${selectedColor.g},${selectedColor.b})` }
 
 		return (
 			<React.Fragment>
-				<LockModal open={lockModalOpen} onCancel={this.onLockCancel} onSubmit={this.onLockSubmit}/>
-				<RainbowModal open={rainbowModalOpen} onCancel={this.onRainbowCancel} onSubmit={this.onRainbowSubmit}/>
-				<PulseModal open={pulseModalOpen} onCancel={this.onPulseCancel} onSubmit={this.onPulseSubmit}/>
-				<CustomModal open={customModalOpen} onCancel={this.onCustomCancel} onSubmit={this.onCustomSubmit}/>
+				<LockModal open={lockModalOpen} onCancel={this.onLockCancel} onSubmit={this.onLockSubmit} />
+				<RainbowModal open={rainbowModalOpen} onCancel={this.onRainbowCancel} onSubmit={this.onRainbowSubmit} />
+				<PulseModal open={pulseModalOpen} onCancel={this.onPulseCancel} onSubmit={this.onPulseSubmit} />
+				<CustomModal open={customModalOpen} onCancel={this.onCustomCancel} onSubmit={this.onCustomSubmit} />
 
 				{/* Main Body */}
 				<div className={classes.controlsContainer}>
@@ -175,13 +180,16 @@ class LED extends React.Component {
 								onChangeComplete={this.onColorClicked}
 								disableAlpha={true} />
 						</Grid>
-						<Grid container alignItems="center" justify="center" className={classes.gridSpacing} item xs={12}>
-							<Button className={classes.button} onClick={() => { this.setState({lockModalOpen: true}) }} color="primary" mini variant="fab">
+						<Grid alignItems="center" justify="center" className={classes.gridSpacing} item xs={12}>
+							<Button className={classes.button} onClick={() => { this.setState({ lockModalOpen: true }) }} color="primary" mini variant="fab">
 								<FontAwesomeIcon icon={locked ? faLock : faLockOpen} />
 							</Button>
-							<Button disabled={locked || currentPattern === "rainbow"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({rainbowModalOpen: true}) }}>Rainbow</Button>
-							<Button disabled={locked || currentPattern === "pulse"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({pulseModalOpen: true}) }}>Pulse</Button>
-							<Button disabled={locked || currentPattern === "custom"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({customModalOpen: true}) }}>Custom</Button>
+							<Button disabled={locked || currentPattern === "rainbow"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ rainbowModalOpen: true }) }}>Rainbow</Button>
+							<Button disabled={locked || currentPattern === "pulse"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ pulseModalOpen: true }) }}>Pulse</Button>
+							<Button disabled={locked || currentPattern === "custom"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ customModalOpen: true }) }}>Custom</Button>
+						</Grid>
+						<Grid item xs={12} alignItems="center" justify="center">
+							<Button disabled={!currentPattern} className={classes.button} color="primary" variant="contained" onClick={this.onPatternStop}>Stop Pattern</Button>
 						</Grid>
 					</Grid>
 				</div>
