@@ -150,6 +150,3 @@ const ledState = require('./led-state');
 
 	console.log('Server running at:', server.info.uri);
 })();
-/etc/letsencrypt / live / home.claybenson.me / privkey.pem
-	/ etc / letsencrypt / live / home.claybenson.me / cert.pem
-	/ etc / letsencrypt / live / home.claybenson.me / chain.pem
