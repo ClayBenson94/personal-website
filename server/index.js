@@ -14,9 +14,9 @@ const ledState = require('./led-state');
 		port: 8333,
 	});
 	const options = {
-		key: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/privkey.pem'),
-		cert: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/cert.pem'),
-		ca: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/chain.pem'),
+		key: fs.readFileSync(process.env.KEY_PATH),
+		cert: fs.readFileSync(process.env.CERT_PATH),
+		ca: fs.readFileSync(process.env.CA_PATH),
 		requestCert: false,
 		rejectUnauthorized: false
 	};
@@ -150,3 +150,6 @@ const ledState = require('./led-state');
 
 	console.log('Server running at:', server.info.uri);
 })();
+/etc/letsencrypt / live / home.claybenson.me / privkey.pem
+	/ etc / letsencrypt / live / home.claybenson.me / cert.pem
+	/ etc / letsencrypt / live / home.claybenson.me / chain.pem
