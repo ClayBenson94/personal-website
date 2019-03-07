@@ -33,7 +33,7 @@ class LED extends React.Component {
 		super(props);
 
 		// this.socket = io(`${window.location.protocol}//${window.location.hostname}:8333/led`, { secure: true });
-		this.socket = io(`${window.location.protocol}//claybenson.me:8333/led`, { secure: true });
+		this.socket = io(`https://home.claybenson.me:8333/led`, { secure: true });
 		this.state = {
 			currentPattern: '',
 			selectedColor: {

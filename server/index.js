@@ -1,18 +1,29 @@
 const Hapi = require('hapi');
+const https = require('https');
+const fs = require('fs');
 require('dotenv').config();
 const ledState = require('./led-state');
 
 (async () => {
-    if (!process.env.LOCK_PASSWORD) {
-        console.error("Missing LOCK_PASSWORD env variable");
-        process.exit(1);
-    }
+	if (!process.env.LOCK_PASSWORD) {
+		console.error("Missing LOCK_PASSWORD env variable");
+		process.exit(1);
+	}
 
 	const server = new Hapi.Server({
 		port: 8333,
 	});
+	const options = {
+		key: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/privkey.pem'),
+		cert: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/cert.pem'),
+		ca: fs.readFileSync('/etc/letsencrypt/live/home.claybenson.me/chain.pem'),
+		requestCert: false,
+		rejectUnauthorized: false
+	};
+	const httpsServer = https.createServer(options);
 
-	let io = require('socket.io')(server.listener);
+	let io = require('socket.io')(httpsServer);
+	httpsServer.listen(8334, '0.0.0.0');
 	const ledSocket = io.of('/led');
 	ledSocket.on('connection', (socket) => {
 		const address = socket.handshake.address;
