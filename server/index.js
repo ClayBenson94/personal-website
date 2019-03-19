@@ -1,8 +1,27 @@
+'use strict';
+
+require('dotenv').config();
+
 const Hapi = require('hapi');
 const https = require('https');
 const fs = require('fs');
-require('dotenv').config();
-const ledState = require('./led-state');
+const pb = require('pi-blaster.js');
+const Bulb = require('./bulb');
+
+function setDiodeColor(color) {
+	const r = Math.round(color.r);
+	const g = Math.round(color.g);
+	const b = Math.round(color.b);
+
+	if (r < 0 || r > 255) { return; }
+	if (g < 0 || g > 255) { return; }
+	if (b < 0 || b > 255) { return; }
+
+	pb.setPwm(17, (r / 255).toFixed(2));
+	pb.setPwm(24, (g / 255).toFixed(2));
+	pb.setPwm(22, (b / 255).toFixed(2));
+}
+const bulb = new Bulb({ r: 255, g: 180, b: 0 }, setDiodeColor);
 
 (async () => {
 	if (!process.env.LOCK_PASSWORD) {
@@ -10,6 +29,7 @@ const ledState = require('./led-state');
 		process.exit(1);
 	}
 
+	let locked = false;
 	const server = new Hapi.Server({
 		port: 8333,
 	});
@@ -28,48 +48,54 @@ const ledState = require('./led-state');
 	ledSocket.on('connection', (socket) => {
 		const address = socket.handshake.address;
 		console.log(`${new Date().toString()}\nNew connection from ${address}\n`);
-		socket.emit('set color', ledState.curColor);
-		socket.emit('locked', ledState.locked);
-		if (ledState.curPattern) {
-			ledSocket.emit('pattern start', ledState.curPattern);
+		socket.emit('set color', bulb.getColor());
+		socket.emit('locked', locked);
+		if (bulb.getPattern()) {
+			ledSocket.emit('pattern start', bulb.getPattern());
 		}
 
 		socket.on('color', (colorObj) => {
 			console.log(`${new Date().toString()}\nColor set by ${address}\n`);
-			if (ledState.locked) {
-				socket.emit('set color', ledState.curColor);
+			if (locked) {
+				socket.emit('set color', bulb.getColor());
 				return;
 			}
-			ledState.curPattern = null;
-			ledSocket.emit('pattern stop');
-			ledState.setCurColor(colorObj);
-			ledState.setDiodeColorObj(colorObj);
+			if (bulb.getPattern()) {
+				bulb.stopPattern();
+				ledSocket.emit('pattern stop');
+			}
+
+			bulb.setColor(colorObj);
 			ledSocket.emit('set color', colorObj);
 		});
 		socket.on('pattern start', (patternObj) => {
 			console.log(`${new Date().toString()}\n${patternObj.patternName} started by ${address}\n`);
-			if (ledState.locked) {
-				socket.emit('set color', ledState.curColor);
+			if (locked) {
+				socket.emit('set color', bulb.getColor());
 				return;
 			}
 
-			if (ledState.parsePatternObj(patternObj)) {
+			try {
+				bulb.startPattern(patternObj);
 				ledSocket.emit('pattern start', patternObj.patternName);
+			} catch (e) {
+				console.error(e);
 			}
 		});
 		socket.on('pattern stop', () => {
-			if (ledState.locked) {
-				socket.emit('set color', ledState.curColor);
+			if (locked) {
+				socket.emit('set color', bulb.getColor());
 				return;
 			}
-			ledState.curPattern = null;
-			ledSocket.emit('pattern stop');
-			ledState.setDiodeColorObj(ledState.curColor);
+			if (bulb.getPattern()) {
+				bulb.stopPattern();
+				ledSocket.emit('pattern stop');
+			}
 		});
 		socket.on('toggle lock', (password) => {
 			if (password === process.env.LOCK_PASSWORD) {
-				ledState.locked = !ledState.locked;
-				ledSocket.emit('locked', ledState.locked);
+				locked = !locked;
+				ledSocket.emit('locked', locked);
 			}
 		});
 	});
@@ -88,15 +114,18 @@ const ledState = require('./led-state');
 				if (!req.query.blue || req.query.blue > 255 || req.query.blue < 0) {
 					return h.response().code(500);
 				}
-				ledState.curPattern = null;
-				ledSocket.emit('pattern stop');
+
+				if (bulb.getPattern()) {
+					bulb.stopPattern();
+					ledSocket.emit('pattern stop');
+				}
+
 				let colorObj = {
 					r: req.query.red,
 					g: req.query.green,
 					b: req.query.blue
 				};
-				ledState.curColor = colorObj;
-				ledState.setDiodeColorObj(colorObj);
+				bulb.setColor(colorObj);
 				ledSocket.emit('set color', colorObj);
 				return h.response().code(200);
 			}
@@ -105,8 +134,8 @@ const ledState = require('./led-state');
 			method: 'GET',
 			path: '/lock',
 			handler: async (req, h) => {
-				ledState.locked = true;
-				ledSocket.emit('locked', ledState.locked);
+				locked = true;
+				ledSocket.emit('locked', locked);
 				return h.response.code(200);
 			}
 		},
@@ -114,8 +143,8 @@ const ledState = require('./led-state');
 			method: 'GET',
 			path: '/unlock',
 			handler: async (req, h) => {
-				ledState.locked = false;
-				ledSocket.emit('locked', ledState.locked);
+				locked = false;
+				ledSocket.emit('locked', locked);
 				return h.response.code(200);
 			}
 		},
@@ -128,8 +157,11 @@ const ledState = require('./led-state');
 					speed: req.query.speed,
 					brightnessPercent: req.query.brightness
 				};
-				if (ledState.parsePatternObj(patternObj)) {
+				try {
+					bulb.startPattern(patternObj);
 					ledSocket.emit('pattern start', patternObj.patternName);
+				} catch (e) {
+					console.error(e);
 				}
 				return h.response().code(200);
 			}
@@ -138,9 +170,10 @@ const ledState = require('./led-state');
 			method: 'GET',
 			path: '/pattern-stop',
 			handler: async (req, h) => {
-				ledState.curPattern = null;
-				ledSocket.emit('pattern stop');
-				ledState.setDiodeColorObj(ledState.curColor);
+				if (bulb.getPattern()) {
+					bulb.stopPattern();
+					ledSocket.emit('pattern stop');
+				}
 				return h.response().code(200);
 			}
 		},

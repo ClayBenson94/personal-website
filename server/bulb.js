@@ -7,12 +7,52 @@ class Bulb {
         this.onColorChange(this.color);
     }
 
+    getColor() {
+        return this.color;
+    }
+
     setColor(color) {
         Object.assign(this.color, color);
     }
 
-    getColor() {
-        return this.color;
+    getPattern() {
+        return this.pattern;
+    }
+
+    startPattern(patternObj) {
+        let speed, brightnessPercent;
+        switch (patternObj.patternName) {
+            case 'rainbow':
+                speed = parseInt(patternObj.speed);
+                brightnessPercent = parseInt(patternObj.brightnessPercent);
+                if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
+                if (isNaN(speed)) throw new Error(`Error in startPattern(): Brightness Percent "${brightnessPercent}" is not a number`);
+
+                this.curPattern = patternObj.patternName;
+                this.rainbow(speed, brightnessPercent);
+                break;
+            case 'pulse':
+                speed = parseInt(patternObj.speed);
+                if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
+
+                this.curPattern = patternObj.patternName;
+                this.pulse(speed, patternObj.color);
+                break;
+            case 'custom':
+                speed = parseInt(patternObj.speed);
+                if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
+
+                this.curPattern = patternObj.patternName;
+                this.customColorSet(speed, patternObj.colors, patternObj.smooth);
+                break;
+            default:
+                throw new Error(`Error in startPattern(): Pattern "${patternObj.pattern}" is not a valid pattern`);
+        }
+    }
+
+    stopPattern() {
+        this.pattern = null;
+        this.onColorChange(this.color);
     }
 
     rainbow(speed, brightnessPercent) {
@@ -87,7 +127,7 @@ class Bulb {
             if (smooth) {
                 curColor = this.calculateStep(curColor, colorObjArr[from], colorObjArr[to], numSteps);
             }
-            this.setDiodeColor(curColor.r, curColor.g, curColor.b);
+            this.onColorChange(curColor);
             if (curSteps >= numSteps) {
                 curColor.r = colorObjArr[to].r;
                 curColor.g = colorObjArr[to].g;
@@ -127,7 +167,7 @@ class Bulb {
             } else {
                 curColor = this.calculateStep(curColor, maxBrightnessColor, minBrightnessColor, numSteps);
             }
-            this.setDiodeColor(curColor.r, curColor.g, curColor.b);
+            this.onColorChange(curColor);
             if (curSteps >= numSteps) {
                 //Make sure our color is exact
                 if (pulseUp) {
@@ -155,37 +195,6 @@ class Bulb {
             return 0;
         }
         return pos;
-    }
-
-    parsePatternObj(patternObj) {
-        let speed, brightnessPercent;
-        switch (patternObj.patternName) {
-            case 'rainbow':
-                speed = parseInt(patternObj.speed);
-                brightnessPercent = parseInt(patternObj.brightnessPercent);
-                if (isNaN(speed)) return;
-                if (isNaN(brightnessPercent)) return;
-
-                this.curPattern = patternObj.patternName;
-                this.rainbow(speed, brightnessPercent);
-                return true;
-            case 'pulse':
-                speed = parseInt(patternObj.speed);
-                if (isNaN(speed)) return;
-
-                this.curPattern = patternObj.patternName;
-                this.pulse(speed, patternObj.color);
-                return true;
-            case 'custom':
-                speed = parseInt(patternObj.speed);
-                if (isNaN(speed)) return;
-
-                this.curPattern = patternObj.patternName;
-                this.customColorSet(speed, patternObj.colors, patternObj.smooth);
-                return true;
-            default:
-                return;
-        }
     }
 }
 
