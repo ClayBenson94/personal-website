@@ -77,7 +77,7 @@ const bulb = new Bulb({ r: 255, g: 180, b: 0 }, setDiodeColor);
 
 			try {
 				bulb.startPattern(patternObj);
-				ledSocket.emit('pattern start', patternObj.patternName);
+				ledSocket.emit('pattern start', patternObj);
 			} catch (e) {
 				console.error(e);
 			}
@@ -159,7 +159,7 @@ const bulb = new Bulb({ r: 255, g: 180, b: 0 }, setDiodeColor);
 				};
 				try {
 					bulb.startPattern(patternObj);
-					ledSocket.emit('pattern start', patternObj.patternName);
+					ledSocket.emit('pattern start', patternObj);
 				} catch (e) {
 					console.error(e);
 				}

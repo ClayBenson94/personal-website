@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { SketchPicker } from 'react-color';
 import io from 'socket.io-client';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Fab } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLockOpen, faLock } from '@fortawesome/free-solid-svg-icons'
 import LockModal from './LockModal';
 import RainbowModal from './RainbowModal';
 import PulseModal from './PulseModal';
 import CustomModal from './CustomModal';
+import Bulb from 'bulb';
 
 const styles = theme => ({
 	controlsContainer: {
@@ -36,7 +37,7 @@ class LED extends React.Component {
 		this.socket = io(`https://home.claybenson.me:8334/led`, { secure: true });
 		this.state = {
 			currentPattern: '',
-			selectedColor: {
+			glowColor: {
 				r: 0,
 				g: 0,
 				b: 0,
@@ -58,6 +59,15 @@ class LED extends React.Component {
 		this.onCustomCancel = this.onCustomCancel.bind(this);
 		this.onCustomSubmit = this.onCustomSubmit.bind(this);
 		this.onPatternStop = this.onPatternStop.bind(this);
+		this.setGlowColor = this.setGlowColor.bind(this);
+
+		this.bulb = new Bulb({ r: 0, g: 0, b: 0 }, this.setGlowColor) //TODO: Add method that uses this.state.glowColor
+	}
+
+	setGlowColor(rgb) {
+		this.setState({
+			glowColor: rgb,
+		});
 	}
 
 	onColorClicked({ rgb }) {
@@ -66,9 +76,7 @@ class LED extends React.Component {
 
 	componentDidMount() {
 		this.socket.on('set color', (rgb) => {
-			this.setState({
-				selectedColor: rgb,
-			});
+			this.bulb.setColor(rgb);
 		});
 
 		this.socket.on('locked', (locked) => {
@@ -77,16 +85,12 @@ class LED extends React.Component {
 			});
 		});
 
-		this.socket.on('pattern start', (patternName) => {
-			this.setState({
-				currentPattern: patternName
-			});
+		this.socket.on('pattern start', (patternObj) => {
+			this.bulb.startPattern(patternObj);
 		});
 
 		this.socket.on('pattern stop', () => {
-			this.setState({
-				currentPattern: ''
-			});
+			this.bulb.stopPattern();
 		});
 	}
 
@@ -145,10 +149,10 @@ class LED extends React.Component {
 
 	onCustomSubmit(speed, colors, smooth) {
 		this.socket.emit('pattern start', {
+			patternName: 'custom',
 			colors: colors,
 			smooth: smooth,
 			speed: speed,
-			patternName: 'custom',
 		});
 		this.setState({
 			customModalOpen: false,
@@ -161,8 +165,8 @@ class LED extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		const { currentPattern, selectedColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
-		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${selectedColor.r},${selectedColor.g},${selectedColor.b})` }
+		const { currentPattern, glowColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
+		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${glowColor.r},${glowColor.g},${glowColor.b})` }
 
 		return (
 			<React.Fragment>
@@ -176,7 +180,7 @@ class LED extends React.Component {
 					<Grid container direction="column" alignItems="center" justify="center">
 						<Grid className={classes.gridSpacing} style={boxShadowStyle} item xs={12}>
 							<SketchPicker
-								color={selectedColor}
+								color={this.bulb.getColor()}
 								onChangeComplete={this.onColorClicked}
 								disableAlpha={true} />
 						</Grid>
