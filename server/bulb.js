@@ -13,6 +13,7 @@ class Bulb {
 
     setColor(color) {
         Object.assign(this.color, color);
+        this.onColorChange(this.color);
     }
 
     getPattern() {
