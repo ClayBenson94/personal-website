@@ -184,15 +184,15 @@ class LED extends React.Component {
 								onChangeComplete={this.onColorClicked}
 								disableAlpha={true} />
 						</Grid>
-						<Grid alignItems="center" justify="center" className={classes.gridSpacing} item xs={12}>
-							<Button className={classes.button} onClick={() => { this.setState({ lockModalOpen: true }) }} color="primary" mini variant="fab">
+						<Grid className={classes.gridSpacing} item xs={12}>
+							<Fab className={classes.button} onClick={() => { this.setState({ lockModalOpen: true }) }} color="primary">
 								<FontAwesomeIcon icon={locked ? faLock : faLockOpen} />
-							</Button>
+							</Fab>
 							<Button disabled={locked || currentPattern === "rainbow"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ rainbowModalOpen: true }) }}>Rainbow</Button>
 							<Button disabled={locked || currentPattern === "pulse"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ pulseModalOpen: true }) }}>Pulse</Button>
 							<Button disabled={locked || currentPattern === "custom"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ customModalOpen: true }) }}>Custom</Button>
 						</Grid>
-						<Grid item xs={12} alignItems="center" justify="center">
+						<Grid item xs={12}>
 							<Button disabled={!currentPattern} className={classes.button} color="primary" variant="contained" onClick={this.onPatternStop}>Stop Pattern</Button>
 						</Grid>
 					</Grid>
