@@ -140,7 +140,7 @@ class Intro extends React.Component {
 						<div className={classes.heroContent}>
 							<FadeOnStart timeout={timeout} delay={0 * fadeDelayUnit}>
 								<Typography align="center" className={classes.greeting} gutterBottom>
-									Hello!
+									Hello.
 								</Typography>
 							</FadeOnStart>
 							<FadeOnStart timeout={timeout} delay={1 * fadeDelayUnit}>
