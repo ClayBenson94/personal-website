@@ -6,7 +6,7 @@ const Hapi = require('hapi');
 const https = require('https');
 const fs = require('fs');
 const pb = require('pi-blaster.js');
-const Bulb = require('./bulb');
+const Bulb = require('bulb');
 
 function setDiodeColor(color) {
 	const r = Math.round(color.r);
