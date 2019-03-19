@@ -135,12 +135,12 @@ class Intro extends React.Component {
 		return (
 			<main>
 				{/* Hero unit */}
-				<Parallax blur={{min: -25, max: 40}} bgClassName={classes.parallaxBg} strength={400} bgImage={'/intro-bg.jpg'}>
+				<Parallax blur={{ min: -25, max: 40 }} bgClassName={classes.parallaxBg} strength={400} bgImage={'/intro-bg.jpg'}>
 					<div className={classes.heroUnit}>
 						<div className={classes.heroContent}>
 							<FadeOnStart timeout={timeout} delay={0 * fadeDelayUnit}>
 								<Typography align="center" className={classes.greeting} gutterBottom>
-									Hello.
+									Hello!
 								</Typography>
 							</FadeOnStart>
 							<FadeOnStart timeout={timeout} delay={1 * fadeDelayUnit}>
