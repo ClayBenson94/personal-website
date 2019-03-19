@@ -29,21 +29,21 @@ class Bulb {
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Brightness Percent "${brightnessPercent}" is not a number`);
 
-                this.curPattern = patternObj.patternName;
+                this.pattern = patternObj.patternName;
                 this.rainbow(speed, brightnessPercent);
                 break;
             case 'pulse':
                 speed = parseInt(patternObj.speed);
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
 
-                this.curPattern = patternObj.patternName;
+                this.pattern = patternObj.patternName;
                 this.pulse(speed, patternObj.color);
                 break;
             case 'custom':
                 speed = parseInt(patternObj.speed);
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
 
-                this.curPattern = patternObj.patternName;
+                this.pattern = patternObj.patternName;
                 this.customColorSet(speed, patternObj.colors, patternObj.smooth);
                 break;
             default:
@@ -71,7 +71,7 @@ class Bulb {
 
         clearInterval(this.patternIntervalID);
         this.patternIntervalID = setInterval(() => {
-            if (this.curPattern !== 'rainbow') { //null or some other pattern
+            if (this.pattern !== 'rainbow') { //null or some other pattern
                 clearInterval(this.patternIntervalID);
                 return;
             }
@@ -120,7 +120,7 @@ class Bulb {
 
         clearInterval(this.patternIntervalID);
         this.patternIntervalID = setInterval(() => {
-            if (this.curPattern !== 'custom') { //null or some other pattern
+            if (this.pattern !== 'custom') { //null or some other pattern
                 clearInterval(this.patternIntervalID);
                 return;
             }
@@ -158,7 +158,7 @@ class Bulb {
 
         clearInterval(this.patternIntervalID);
         this.patternIntervalID = setInterval(() => {
-            if (this.curPattern !== 'pulse') { //null or some other pattern
+            if (this.pattern !== 'pulse') { //null or some other pattern
                 clearInterval(this.patternIntervalID);
                 return;
             }
