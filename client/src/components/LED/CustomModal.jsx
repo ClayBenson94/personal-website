@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Fab, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
+import { Fab, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUndoAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ChromePicker } from 'react-color';
@@ -64,26 +64,26 @@ class CustomModal extends React.Component {
 
 	onCancel() {
 		this.props.onCancel();
-		this.setState({
-			speed: 45,
-			customColors: defaultColors.slice(),
-		});
+		// this.setState({
+		// 	speed: 45,
+		// 	customColors: defaultColors.slice(),
+		// });
 	}
 
 	onSubmit() {
 		this.props.onSubmit(this.state.speed, this.state.customColors, false);
-		this.setState({
-			speed: 45,
-			customColors: defaultColors.slice(),
-		});
+		// this.setState({
+		// 	speed: 45,
+		// 	customColors: defaultColors.slice(),
+		// });
 	}
 
 	onSubmitSmooth() {
 		this.props.onSubmit(this.state.speed, this.state.customColors, true);
-		this.setState({
-			speed: 45,
-			customColors: defaultColors.slice(),
-		});
+		// this.setState({
+		// 	speed: 45,
+		// 	customColors: defaultColors.slice(),
+		// });
 	}
 
 	onSpeedChanged(event, value) {
@@ -149,12 +149,16 @@ class CustomModal extends React.Component {
 						className={classes.slider}
 					/>
 					<div className={classes.buttons}>
-						<Fab size="small" color="primary" onClick={this.resetColors}>
-							<FontAwesomeIcon icon={faUndoAlt} />
-						</Fab>
-						<Fab size="small" color="primary" onClick={this.addColor}>
-							<FontAwesomeIcon icon={faPlus} />
-						</Fab>
+						<Tooltip title="Reset" placement="right">
+							<Fab size="small" color="primary" onClick={this.resetColors}>
+								<FontAwesomeIcon icon={faUndoAlt} />
+							</Fab>
+						</Tooltip>
+						<Tooltip title="Add Color" placement="right">
+							<Fab size="small" color="primary" onClick={this.addColor}>
+								<FontAwesomeIcon icon={faPlus} />
+							</Fab>
+						</Tooltip>
 					</div>
 					{customColors.map((customColor, i) => {
 						return (
