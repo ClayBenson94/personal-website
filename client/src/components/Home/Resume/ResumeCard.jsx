@@ -7,8 +7,8 @@ import classNames from 'classnames';
 
 const styles = theme => ({
 	resumePaper: {
-		paddingBottom: theme.spacing.unit * 2,
-		marginBottom: theme.spacing.unit * 4,
+		paddingBottom: theme.spacing(2),
+		marginBottom: theme.spacing(4),
 		[theme.breakpoints.down('xs')]: {
 			textAlign: 'center',
 		},
@@ -43,25 +43,25 @@ function ResumeCard(props) {
 
 	return (
 		<div className={classes.resumePaper}>
-			<Typography className={classes.title} color="textPrimary" paragraph variant="headline" >
+			<Typography className={classes.title} color="textPrimary" paragraph variant="h5" >
 				{title}
 			</Typography>
-			<Typography color="textSecondary" className={classes.information} variant="title" >
+			<Typography color="textSecondary" className={classes.information} variant="h6" >
 				{subtitle}
 			</Typography>
 			<Hidden xsDown>
-				<Typography color="textSecondary" className={classNames(classes.information, classes.bullet)} paragraph variant="subheading" >
+				<Typography color="textSecondary" className={classNames(classes.information, classes.bullet)} paragraph variant="body2" >
 					•
 				</Typography>
 			</Hidden>
-			<Typography color="textSecondary" className={classes.information} paragraph  variant="subheading" >
+			<Typography color="textSecondary" className={classes.information} paragraph variant="body2" >
 				{date}
 			</Typography>
 			<div className={classes.content}>
 				<Typography color="textPrimary" paragraph variant="body1" >
 					{children}
 				</Typography>
-				<Typography variant="caption" >
+				<Typography color="textSecondary" variant="caption" >
 					{caption}
 				</Typography>
 			</div>

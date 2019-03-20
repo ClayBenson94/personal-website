@@ -27,7 +27,7 @@ class App extends Component {
 								<Switch>
 									<Route exact path='/' component={Home} />
 									<Route exact path='/led' component={LED} />
-									<Route status={404} component={NotFound}/>
+									<Route status={404} component={NotFound} />
 									{/* <Route status={404} component={() => {
 										return (
 											<div>

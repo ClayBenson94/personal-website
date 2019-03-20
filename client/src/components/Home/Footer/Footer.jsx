@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const styles = theme => ({
 	footer: {
 		backgroundColor: theme.palette.background.paper,
-		padding: theme.spacing.unit * 6,
+		padding: theme.spacing(6),
 	},
 	link: {
 		color: theme.palette.darkAndLight,
@@ -19,10 +19,10 @@ function Footer(props) {
 
 	return (
 		<footer className={classes.footer}>
-			<Typography variant="title" align="center" gutterBottom>
+			<Typography variant="h6" align="center" gutterBottom>
 				Some other pages to check out:
 			</Typography>
-			<Typography variant="subheading" align="center" color="textSecondary" component="p">
+			<Typography variant="body2" align="center" color="textSecondary" component="p">
 				<Link className={classes.link} to='/led'>Control the lights in my house</Link>
 			</Typography>
 		</footer>

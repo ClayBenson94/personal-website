@@ -8,10 +8,17 @@ import Slider from "@material-ui/lab/Slider";
 const styles = theme => ({
 	picker: {
 		margin: 'auto',
+		touchAction: 'none',
 		[theme.breakpoints.down('xs')]: {
 			width: '160px !important',
-			touchAction: 'none',
 		},
+	},
+	slider: {
+		marginBottom: theme.spacing(4),
+		touchAction: 'none',
+	},
+	dialog: {
+		overflow: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
 	},
 });
 
@@ -74,8 +81,8 @@ class PulseModal extends React.Component {
 		return (
 			<Dialog fullWidth open={open} onClose={this.onCancel}>
 				<DialogTitle>Pulse</DialogTitle>
-				<DialogContent>
-					<Typography variant="body2">
+				<DialogContent className={classes.dialog}>
+					<Typography variant="body1" gutterBottom>
 						Speed: {speedText}
 					</Typography>
 					<Slider
@@ -84,6 +91,7 @@ class PulseModal extends React.Component {
 						step={5}
 						value={speed}
 						onChange={this.onSpeedChanged}
+						className={classes.slider}
 					/>
 				</DialogContent>
 				<ChromePicker

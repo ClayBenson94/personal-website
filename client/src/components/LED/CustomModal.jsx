@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
+import { Fab, Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUndoAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { ChromePicker } from 'react-color';
@@ -10,16 +10,23 @@ import Slider from "@material-ui/lab/Slider";
 const styles = theme => ({
 	picker: {
 		margin: 'auto',
+		touchAction: 'none',
 		[theme.breakpoints.down('xs')]: {
 			width: '160px !important',
-			touchAction: 'none',
 		},
-		marginBottom: theme.spacing.unit * 2,
+		marginBottom: theme.spacing(2),
 	},
 	buttons: {
 		display: 'flex',
 		justifyContent: 'space-evenly',
-		marginBottom: theme.spacing.unit * 2,
+		marginBottom: theme.spacing(2),
+	},
+	slider: {
+		marginBottom: theme.spacing(4),
+		touchAction: 'none',
+	},
+	dialog: {
+		overflow: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
 	},
 });
 
@@ -129,8 +136,8 @@ class CustomModal extends React.Component {
 		return (
 			<Dialog fullWidth open={open} onClose={this.onCancel}>
 				<DialogTitle>Custom ({customColors.length} colors)</DialogTitle>
-				<DialogContent>
-					<Typography variant="body2">
+				<DialogContent className={classes.dialog}>
+					<Typography variant="body1" gutterBottom>
 						Speed: {speedText}
 					</Typography>
 					<Slider
@@ -139,14 +146,15 @@ class CustomModal extends React.Component {
 						step={5}
 						value={speed}
 						onChange={this.onSpeedChanged}
+						className={classes.slider}
 					/>
 					<div className={classes.buttons}>
-						<Button mini color="primary" variant="fab" onClick={this.resetColors}>
+						<Fab size="small" color="primary" onClick={this.resetColors}>
 							<FontAwesomeIcon icon={faUndoAlt} />
-						</Button>
-						<Button mini color="primary" variant="fab" onClick={this.addColor}>
+						</Fab>
+						<Fab size="small" color="primary" onClick={this.addColor}>
 							<FontAwesomeIcon icon={faPlus} />
-						</Button>
+						</Fab>
 					</div>
 					{customColors.map((customColor, i) => {
 						return (

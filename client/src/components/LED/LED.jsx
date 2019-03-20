@@ -21,11 +21,11 @@ const styles = theme => ({
 		justifyContent: 'center',
 	},
 	button: {
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
 	},
 	gridSpacing: {
-		margin: theme.spacing.unit * 3,
+		margin: theme.spacing(3),
 	},
 });
 
@@ -36,7 +36,6 @@ class LED extends React.Component {
 		// this.socket = io(`${window.location.protocol}//${window.location.hostname}:8333/led`, { secure: true });
 		this.socket = io(`https://home.claybenson.me:8334/led`, { secure: true });
 		this.state = {
-			currentPattern: '',
 			glowColor: {
 				r: 0,
 				g: 0,
@@ -165,7 +164,7 @@ class LED extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		const { currentPattern, glowColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
+		const { glowColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
 		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${glowColor.r},${glowColor.g},${glowColor.b})` }
 
 		return (
@@ -185,15 +184,15 @@ class LED extends React.Component {
 								disableAlpha={true} />
 						</Grid>
 						<Grid className={classes.gridSpacing} item xs={12}>
-							<Fab className={classes.button} onClick={() => { this.setState({ lockModalOpen: true }) }} color="primary">
+							<Fab size="small" className={classes.button} onClick={() => { this.setState({ lockModalOpen: true }) }} color="primary">
 								<FontAwesomeIcon icon={locked ? faLock : faLockOpen} />
 							</Fab>
-							<Button disabled={locked || currentPattern === "rainbow"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ rainbowModalOpen: true }) }}>Rainbow</Button>
-							<Button disabled={locked || currentPattern === "pulse"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ pulseModalOpen: true }) }}>Pulse</Button>
-							<Button disabled={locked || currentPattern === "custom"} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ customModalOpen: true }) }}>Custom</Button>
+							<Button disabled={locked || (this.bulb.getPattern() && this.bulb.getPattern().patternName === "rainbow")} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ rainbowModalOpen: true }) }}>Rainbow</Button>
+							<Button disabled={locked || (this.bulb.getPattern() && this.bulb.getPattern().patternName === "pulse")} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ pulseModalOpen: true }) }}>Pulse</Button>
+							<Button disabled={locked || (this.bulb.getPattern() && this.bulb.getPattern().patternName === "custom")} className={classes.button} color="primary" variant="contained" onClick={() => { this.setState({ customModalOpen: true }) }}>Custom</Button>
 						</Grid>
 						<Grid item xs={12}>
-							<Button disabled={!currentPattern} className={classes.button} color="primary" variant="contained" onClick={this.onPatternStop}>Stop Pattern</Button>
+							<Button disabled={!this.bulb.getPattern()} className={classes.button} color="primary" variant="contained" onClick={this.onPatternStop}>Stop Pattern</Button>
 						</Grid>
 					</Grid>
 				</div>

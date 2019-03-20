@@ -5,7 +5,13 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography }
 import Slider from "@material-ui/lab/Slider";
 
 const styles = theme => ({
-
+	slider: {
+		marginBottom: theme.spacing(4),
+		touchAction: 'none',
+	},
+	dialog: {
+		overflow: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
+	},
 });
 
 class RainbowModal extends React.Component {
@@ -52,7 +58,7 @@ class RainbowModal extends React.Component {
 	}
 
 	render() {
-		const { open } = this.props;
+		const { open, classes } = this.props;
 		const { speed, brightness } = this.state;
 
 		let speedText = '';
@@ -67,8 +73,8 @@ class RainbowModal extends React.Component {
 		return (
 			<Dialog fullWidth open={open} onClose={this.onCancel}>
 				<DialogTitle>Rainbow</DialogTitle>
-				<DialogContent>
-					<Typography variant="body2">
+				<DialogContent className={classes.dialog}>
+					<Typography variant="body1" gutterBottom>
 						Speed: {speedText}
 					</Typography>
 					<Slider
@@ -77,8 +83,9 @@ class RainbowModal extends React.Component {
 						step={5}
 						value={speed}
 						onChange={this.onSpeedChanged}
+						className={classes.slider}
 					/>
-					<Typography variant="body2">
+					<Typography variant="body1" gutterBottom>
 						Brightness: {brightness}%
 					</Typography>
 					<Slider
@@ -87,7 +94,11 @@ class RainbowModal extends React.Component {
 						step={5}
 						value={brightness}
 						onChange={this.onBrightnessChanged}
+						className={classes.slider}
 					/>
+					{/* <Typography>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</Typography> */}
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={this.onCancel} color="primary">

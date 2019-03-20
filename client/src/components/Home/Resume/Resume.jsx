@@ -6,20 +6,20 @@ import { Typography, Grid } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Consumer } from '../../../Context';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 
 const styles = (theme) => {
 	return {
 		layout: {
 			width: 'auto',
-			marginLeft: theme.spacing.unit * 6,
-			marginRight: theme.spacing.unit * 6,
-			[theme.breakpoints.up(1000 + theme.spacing.unit * 6 * 2)]: {
+			marginLeft: theme.spacing(6),
+			marginRight: theme.spacing(6),
+			[theme.breakpoints.up(1000 + theme.spacing(6 * 2))]: {
 				width: 1000,
 				marginLeft: 'auto',
 				marginRight: 'auto',
 			},
-			padding: `${theme.spacing.unit * 8}px 0`,
+			padding: `${theme.spacing(8)}px 0`,
 		},
 		cardCategory: {
 			[theme.breakpoints.down('xs')]: {
@@ -29,13 +29,13 @@ const styles = (theme) => {
 		cardCategoryLabel: {
 			borderBottom: `3px solid ${theme.palette.darkAndLight}`,
 			display: 'inline-block',
-			marginBottom: theme.spacing.unit * 2,
+			marginBottom: theme.spacing(2),
 		},
 		link: {
 			color: theme.palette.darkAndLight,
 		},
 		lightIcon: {
-			margin: theme.spacing.unit * 2,
+			margin: theme.spacing(2),
 			float: 'right',
 		},
 	};
@@ -49,13 +49,13 @@ function Resume(props) {
 			{(context) => {
 				return (
 					<React.Fragment>
-						<Button className={classes.lightIcon} mini color="primary" variant="fab" onClick={context.toggleTheme}>
+						<Fab className={classes.lightIcon} color="primary" size="small" onClick={context.toggleTheme}>
 							<FontAwesomeIcon icon={faLightbulb} />
-						</Button>
+						</Fab>
 						<div id="about" className={classes.layout}>
 							<Grid container direction="row">
 								<Grid className={classes.cardCategory} item xs={12} sm={3}>
-									<Typography className={classes.cardCategoryLabel} variant="headline">
+									<Typography className={classes.cardCategoryLabel} variant="h5">
 										Education
 									</Typography>
 								</Grid>
@@ -72,7 +72,7 @@ function Resume(props) {
 							</Grid>
 							<Grid container direction="row">
 								<Grid className={classes.cardCategory} item xs={12} sm={3}>
-									<Typography className={classes.cardCategoryLabel} variant="headline">
+									<Typography className={classes.cardCategoryLabel} variant="h5">
 										Work
 									</Typography>
 								</Grid>

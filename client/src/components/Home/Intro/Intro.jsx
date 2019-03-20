@@ -80,19 +80,19 @@ const styles = theme => ({
 		bottom: '0',
 		fontSize: '3rem',
 		[theme.breakpoints.down('sm')]: {
-			marginBottom: theme.spacing.unit * 3,
+			marginBottom: theme.spacing(3),
 		},
 		[theme.breakpoints.up('md')]: {
-			marginBottom: theme.spacing.unit * 7,
+			marginBottom: theme.spacing(7),
 		},
 		[theme.breakpoints.up('lg')]: {
-			marginBottom: theme.spacing.unit * 10,
+			marginBottom: theme.spacing(10),
 		},
 	},
 	icon: {
 		color: 'white',
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
+		marginLeft: theme.spacing(1),
+		marginRight: theme.spacing(1),
 		[theme.breakpoints.down('sm')]: {
 			fontSize: '2rem',
 		},
@@ -122,7 +122,7 @@ const styles = theme => ({
 		},
 	},
 	heroButtons: {
-		marginTop: theme.spacing.unit * 4,
+		marginTop: theme.spacing(4),
 	},
 });
 
@@ -144,23 +144,23 @@ class Intro extends React.Component {
 								</Typography>
 							</FadeOnStart>
 							<FadeOnStart timeout={timeout} delay={1 * fadeDelayUnit}>
-								<Typography variant="display3" align="center" className={classes.name} gutterBottom>
+								<Typography variant="h2" align="center" className={classes.name} gutterBottom>
 									I'm Clay Benson
 								</Typography>
 							</FadeOnStart>
 							<FadeOnStart timeout={timeout} delay={2 * fadeDelayUnit}>
 								<div>
-									<Typography variant="title" align="center" className={classes.intro} paragraph>
+									<Typography variant="h6" align="center" className={classes.intro} paragraph>
 										I'm a Software Developer.
 									</Typography>
-									<Typography variant="title" align="center" className={classes.intro} paragraph>
+									<Typography variant="h6" align="center" className={classes.intro} paragraph>
 										I enjoy breaking and fixing things.
 									</Typography>
 								</div>
 							</FadeOnStart>
 							<FadeOnStart timeout={timeout} delay={3 * fadeDelayUnit}>
 								<div className={classes.heroButtons}>
-									<Grid container spacing={16} justify="center">
+									<Grid container spacing={8} justify="center">
 										<Grid item>
 											<AnchorLink className={classes.noAnchorStyle} href='#about'>
 												<IconButton className={classes.button} aria-label="Delete">

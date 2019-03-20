@@ -23,10 +23,10 @@ class NotFound extends React.Component {
 		return (
 			<div className={classes.container}>
 				<div>
-					<Typography align="center" paragraph variant="display3">
+					<Typography align="center" paragraph variant="h2">
 						Page not found.
 					</Typography>
-					<Typography align="center" variant="headline">
+					<Typography color="textSecondary" align="center" variant="h5">
 						Would you like to go to the <Link className={classes.link} to="/">Homepage</Link>?
 					</Typography>
 				</div>
