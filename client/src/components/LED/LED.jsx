@@ -65,7 +65,11 @@ class LED extends React.Component {
 
 	setGlowColor(rgb) {
 		this.setState({
-			glowColor: rgb,
+			glowColor: {
+				r: Math.round(rgb.r),
+				g: Math.round(rgb.g),
+				b: Math.round(rgb.b),
+			},
 		});
 	}
 
