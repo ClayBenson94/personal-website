@@ -26,7 +26,7 @@ const styles = theme => ({
 		touchAction: 'none',
 	},
 	dialog: {
-		overflow: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
+		overflowX: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
 	},
 });
 
