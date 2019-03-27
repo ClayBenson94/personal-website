@@ -169,7 +169,7 @@ class LED extends React.Component {
 	render() {
 		const { classes } = this.props;
 		const { glowColor, locked, lockModalOpen, rainbowModalOpen, pulseModalOpen, customModalOpen } = this.state;
-		const boxShadowStyle = { boxShadow: `0 0 4rem 1.3rem rgb(${glowColor.r},${glowColor.g},${glowColor.b})` }
+		const boxShadowStyle = { boxShadow: `0 0 3rem 2.3rem rgb(${glowColor.r},${glowColor.g},${glowColor.b})` }
 
 		return (
 			<React.Fragment>
