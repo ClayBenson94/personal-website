@@ -66,8 +66,8 @@ function Resume(props) {
 										date="May 2017"
 										caption="Related coursework: Analysis of Algorithms, Discrete Mathematics">
 										A wonderful five year program which allowed me to spend over a years worth of time at co-ops and internships.
-								Attained a minor in mathematics, and was able to take fun interesting courses like <i>Game Theory</i>, <i>Cryptography</i>, and <i>Computer Graphics</i>.
-							</ResumeCard>
+										Attained a minor in mathematics, and was able to take fun interesting courses like <i>Game Theory</i>, <i>Cryptography</i>, and <i>Computer Graphics</i>.
+									</ResumeCard>
 								</Grid>
 							</Grid>
 							<Grid container direction="row">
@@ -81,8 +81,8 @@ function Resume(props) {
 										title="Ellucian"
 										subtitle="Software Developer"
 										date="July 2017 - Current"
-										caption="">
-										Full stack development using primarily Node.js, SQL, and React to build highly available and scalable applications. I've worked
+										caption="React, Node.js, PostgreSQL. Exposure to Terraform and AWS services">
+										Full stack development building scalable web apps and APIs that enable integrations between client apps. I've worked
 										across several teams and received recognitions for my cross-team efforts. I've had the opportunity to mentor interns during the summer, which has
 										proven to be very rewarding.
 									</ResumeCard>
@@ -90,9 +90,9 @@ function Resume(props) {
 										title="Ellucian"
 										subtitle="Software Developer Intern"
 										date="May 2016 - August 2016"
-										caption="">
-										As an intern, I was given the freedom to create an initial implementation for a product that would help customers integrate with other Ellucian
-										products. We primarily programmed in Node.js for our backend, and used jQuery and CSS for the front end. This was one of the first times I'd worked directly with
+										caption="Node.js, jQuery, CSS, Socket.io">
+										As an intern, I created an initial implementation for a product that would help customers integrate with other Ellucian
+										products. This is where I learned Node.js, and got more familiar with front end development. This was one of the first times I'd worked directly with
 										remote employees, and it taught me quite a bit about communication within teams.
 									</ResumeCard>
 									<ResumeCard
@@ -100,7 +100,7 @@ function Resume(props) {
 										subtitle="Automation Engineer"
 										date="May 2015 - December 2015"
 										caption="">
-										At Lenel, I had the responsibility of designing and producint automated test cases for several of Lenel's products. I caught and verified bugs using regression tests,
+										At Lenel, I had the responsibility of designing and producing automated test cases for several of Lenel's products. I caught and verified bugs using regression tests,
 										and worked in an agile development for the first time.
 									</ResumeCard>
 									<ResumeCard
