@@ -65,7 +65,7 @@ function Resume(props) {
 										subtitle="BS in Computer Science"
 										date="May 2017"
 										caption="Related coursework: Analysis of Algorithms, Discrete Mathematics">
-										A wonderful five year program which allowed me to spend over a years worth of time at co-ops and internships.
+										A wonderful five year program which allowed me to spend over a year's worth of time at co-ops and internships.
 										Attained a minor in mathematics, and was able to take fun interesting courses like <i>Game Theory</i>, <i>Cryptography</i>, and <i>Computer Graphics</i>.
 									</ResumeCard>
 								</Grid>
