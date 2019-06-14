@@ -78,12 +78,20 @@ function Resume(props) {
 								</Grid>
 								<Grid item xs={12} sm={9}>
 									<ResumeCard
+										title="Oddball"
+										subtitle="Backend Engineer"
+										date="June 2019 - Current"
+										caption="Node.js, MySQL, Docker, and AWS services">
+										At Oddball, I will be working on creating login & authentication services for backend systems used by the US Government. <br />
+										I only started here recently, so you'll see this section update in the future!
+									</ResumeCard>
+									<ResumeCard
 										title="Ellucian"
 										subtitle="Software Developer"
-										date="July 2017 - Current"
+										date="July 2017 - June 2019"
 										caption="React, Node.js, PostgreSQL. Exposure to Terraform and AWS services">
-										Full stack development building scalable web apps and APIs that enable integrations between client apps. I've worked
-										across several teams and received recognitions for my cross-team efforts. I've had the opportunity to mentor interns during the summer, which has
+										Full stack development building scalable web apps and APIs that enable integrations between client apps. I worked
+										across several teams and received recognitions for my cross-team efforts. I also had the opportunity to mentor interns during the summer, which has
 										proven to be very rewarding.
 									</ResumeCard>
 									<ResumeCard
