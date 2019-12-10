@@ -56,34 +56,17 @@ function Resume(props) {
 							<Grid container direction="row">
 								<Grid className={classes.cardCategory} item xs={12} sm={3}>
 									<Typography className={classes.cardCategoryLabel} variant="h5">
-										Education
-									</Typography>
-								</Grid>
-								<Grid item xs={12} sm={9}>
-									<ResumeCard
-										title="Rochester Institute of Technology"
-										subtitle="BS in Computer Science"
-										date="May 2017"
-										caption="Related coursework: Analysis of Algorithms, Discrete Mathematics">
-										A wonderful five year program which allowed me to spend over a year's worth of time at co-ops and internships.
-										Attained a minor in mathematics, and was able to take fun interesting courses like <i>Game Theory</i>, <i>Cryptography</i>, and <i>Computer Graphics</i>.
-									</ResumeCard>
-								</Grid>
-							</Grid>
-							<Grid container direction="row">
-								<Grid className={classes.cardCategory} item xs={12} sm={3}>
-									<Typography className={classes.cardCategoryLabel} variant="h5">
 										Work
 									</Typography>
 								</Grid>
 								<Grid item xs={12} sm={9}>
 									<ResumeCard
 										title="Oddball"
-										subtitle="Backend Engineer"
+										subtitle="Software Engineer"
 										date="June 2019 - Current"
 										caption="Node.js, MySQL, Docker, and AWS services">
-										At Oddball, I will be working on creating login & authentication services for backend systems used by the US Government. <br />
-										I only started here recently, so you'll see this section update in the future!
+										Creating and managing login & authentication services for backend systems used
+										by <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.healthcare.gov/">healthcare.gov</a> and <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.mymedicare.gov/">mymedicare.gov</a>
 									</ResumeCard>
 									<ResumeCard
 										title="Ellucian"
@@ -91,7 +74,7 @@ function Resume(props) {
 										date="July 2017 - June 2019"
 										caption="React, Node.js, PostgreSQL. Exposure to Terraform and AWS services">
 										Full stack development building scalable web apps and APIs that enable integrations between client apps. I worked
-										across several teams and received recognitions for my cross-team efforts. I also had the opportunity to mentor interns during the summer, which has
+										across several teams and received recognition for my cross-team efforts. I also had the opportunity to mentor interns during the summer, which has
 										proven to be very rewarding.
 									</ResumeCard>
 									<ResumeCard
@@ -118,6 +101,23 @@ function Resume(props) {
 										caption="">
 										At RSA, I was in charge of creating and maintaining test cases for their <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.rocsoft.com/QDirect">QDirect</a> product
 										based on feature specifications. I learned how to create useful test cases and bug reports.
+									</ResumeCard>
+								</Grid>
+							</Grid>
+							<Grid container direction="row">
+								<Grid className={classes.cardCategory} item xs={12} sm={3}>
+									<Typography className={classes.cardCategoryLabel} variant="h5">
+										Education
+									</Typography>
+								</Grid>
+								<Grid item xs={12} sm={9}>
+									<ResumeCard
+										title="Rochester Institute of Technology"
+										subtitle="BS in Computer Science"
+										date="May 2017"
+										caption="Related coursework: Analysis of Algorithms, Discrete Mathematics">
+										A wonderful five year program which allowed me to spend over a year's worth of time at co-ops and internships.
+										Attained a minor in mathematics, and was able to take fun interesting courses like <i>Game Theory</i>, <i>Cryptography</i>, and <i>Computer Graphics</i>.
 									</ResumeCard>
 								</Grid>
 							</Grid>
