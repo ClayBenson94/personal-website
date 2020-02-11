@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
 import { ChromePicker } from 'react-color';
-import Slider from "@material-ui/lab/Slider";
+import Slider from "@material-ui/core/Slider";
 
 const styles = theme => ({
 	picker: {
@@ -17,6 +17,10 @@ const styles = theme => ({
 		marginBottom: theme.spacing(4),
 		touchAction: 'none',
 	},
+	sliderContainer: {
+		marginLeft: theme.spacing(2),
+		marginRight: theme.spacing(2),
+	},
 	dialog: {
 		overflow: 'hidden', //hack because dialog has scrollbars even though no content overflows? Maybe MUI v4 issue
 	},
@@ -27,7 +31,7 @@ class PulseModal extends React.Component {
 		super(props);
 
 		this.state = {
-			speed: 45,
+			speed: 50,
 			brightness: 100,
 		};
 
@@ -40,7 +44,7 @@ class PulseModal extends React.Component {
 	onCancel() {
 		this.props.onCancel();
 		this.setState({
-			speed: 45,
+			speed: 50,
 			color: {},
 		});
 	}
@@ -48,7 +52,7 @@ class PulseModal extends React.Component {
 	onSubmit() {
 		this.props.onSubmit(this.state.speed, this.state.color);
 		this.setState({
-			speed: 45,
+			speed: 50,
 			color: {},
 		});
 	}
@@ -68,31 +72,39 @@ class PulseModal extends React.Component {
 	render() {
 		const { classes, open } = this.props;
 		const { speed, color } = this.state;
-
-		let speedText = '';
-		if (speed <= 40) {
-			speedText = 'Fast';
-		} else if (speed > 40 && speed <= 70) {
-			speedText = 'Medium';
-		} else if (speed > 70) {
-			speedText = 'Slow';
-		}
+		const speedMarks = [
+			{
+			  value: 1,
+			  label: 'Very Slow',
+			},
+			{
+			  value: 50,
+			  label: 'Medium',
+			},
+			{
+			  value: 100,
+			  label: 'Very Fast',
+			},
+		];
 
 		return (
 			<Dialog fullWidth open={open} onClose={this.onCancel}>
 				<DialogTitle>Pulse</DialogTitle>
 				<DialogContent className={classes.dialog}>
-					<Typography variant="body1" gutterBottom>
-						Speed: {speedText}
-					</Typography>
-					<Slider
-						min={100}
-						max={10}
-						step={5}
-						value={speed}
-						onChange={this.onSpeedChanged}
-						className={classes.slider}
-					/>
+					<div className={classes.sliderContainer}>
+						<Typography gutterBottom>
+							Speed
+						</Typography>
+						<Slider
+							min={1}
+							max={100}
+							marks={speedMarks}
+							step={5}
+							value={speed}
+							onChange={this.onSpeedChanged}
+							className={classes.slider}
+						/>
+					</div>
 				</DialogContent>
 				<ChromePicker
 					color={color}
