@@ -101,7 +101,7 @@ class Bulb {
                 g: rgb[1],
                 b: rgb[2],
             });
-        }, mapSpeedToDelay(speed));
+        }, this.mapSpeedToDelay(speed));
     }
 
     calculateStep(curColor, fromColor, toColor, numSteps) {
@@ -149,7 +149,7 @@ class Bulb {
                 curSteps = 0;
             }
             curSteps++;
-        }, mapSpeedToDelay(speed));
+        }, this.mapSpeedToDelay(speed));
     }
 
     pulse(speed, colorObj) {
@@ -196,7 +196,7 @@ class Bulb {
             }
             curSteps++;
 
-        }, mapSpeedToDelay(speed));
+        }, this.mapSpeedToDelay(speed));
     }
 
     getPos(pos, maxIndex) {
