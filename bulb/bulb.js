@@ -72,6 +72,7 @@ class Bulb {
         if (brightnessPercent > 100) brightnessPercent = 100;
 
         let brightnessMax = (255 / 100) * brightnessPercent; //Convert to 2.55..255 range
+        let delay = this.mapSpeedToDelay(speed);
 
         let stepAmount = brightnessMax / 255;
 
@@ -99,7 +100,7 @@ class Bulb {
                 g: rgb[1],
                 b: rgb[2],
             });
-        }, this.mapSpeedToDelay(speed));
+        }, delay);
     }
 
     calculateStep(curColor, fromColor, toColor, numSteps) {
@@ -121,7 +122,9 @@ class Bulb {
         let from = 0;
         let to = 1;
 
-        let numSteps = speed * 3;
+        let delay = this.mapSpeedToDelay(speed);
+
+        let numSteps = delay * 3;
         let curSteps = 0;
         let curColor = JSON.parse(JSON.stringify(colorObjArr[from]));
 
@@ -145,7 +148,7 @@ class Bulb {
                 curSteps = 0;
             }
             curSteps++;
-        }, this.mapSpeedToDelay(speed));
+        }, delay);
     }
 
     pulse(speed, colorObj) {
@@ -155,8 +158,9 @@ class Bulb {
             g: Math.round(colorObj.g / 5),
             b: Math.round(colorObj.b / 5)
         };
+        let delay = this.mapSpeedToDelay(speed);
 
-        let numSteps = speed * 3;
+        let numSteps = delay * 3;
         let curSteps = 0;
         let curColor = JSON.parse(JSON.stringify(minBrightnessColor));
         let pulseUp = true;
@@ -190,7 +194,7 @@ class Bulb {
             }
             curSteps++;
 
-        }, this.mapSpeedToDelay(speed));
+        }, delay);
     }
 
     getPos(pos, maxIndex) {
