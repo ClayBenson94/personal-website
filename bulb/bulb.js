@@ -155,7 +155,7 @@ class Bulb {
             g: Math.round(colorObj.g / 5),
             b: Math.round(colorObj.b / 5)
         };
-        let delay = this.mapSpeedToDelay(speed, 5, 50);
+        let delay = this.mapSpeedToDelay(speed, 20, 60);
 
         let numSteps = delay * 3;
         let curSteps = 0;
