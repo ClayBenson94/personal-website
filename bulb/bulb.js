@@ -7,15 +7,12 @@ class Bulb {
         this.onColorChange(this.color);
     }
 
-    mapSpeedToDelay(speed) {
+    mapSpeedToDelay(speed, delayRangeMin, delayRangeMax) {
         // Speeds go from 1 to 100
         const speedRangeStart = 1;
         const speedRangeEnd = 100;
 
-        // Delays go from 100 to 10
-        const delayRangeStart = 100;
-        const delayRangeEnd = 10;
-        return (speed - speedRangeStart) / (speedRangeEnd - speedRangeStart) * (delayRangeEnd - delayRangeStart) + delayRangeStart;
+        return (speed - speedRangeStart) / (speedRangeEnd - speedRangeStart) * (delayRangeMin - delayRangeMax) + delayRangeMax;
     }
 
     getColor() {
@@ -72,7 +69,7 @@ class Bulb {
         if (brightnessPercent > 100) brightnessPercent = 100;
 
         let brightnessMax = (255 / 100) * brightnessPercent; //Convert to 2.55..255 range
-        let delay = this.mapSpeedToDelay(speed);
+        let delay = this.mapSpeedToDelay(speed, 10, 100);
 
         let stepAmount = brightnessMax / 255;
 
@@ -122,7 +119,7 @@ class Bulb {
         let from = 0;
         let to = 1;
 
-        let delay = this.mapSpeedToDelay(speed);
+        let delay = this.mapSpeedToDelay(speed, 10, 100);
 
         let numSteps = delay * 3;
         let curSteps = 0;
@@ -158,7 +155,7 @@ class Bulb {
             g: Math.round(colorObj.g / 5),
             b: Math.round(colorObj.b / 5)
         };
-        let delay = this.mapSpeedToDelay(speed);
+        let delay = this.mapSpeedToDelay(speed, 5, 50);
 
         let numSteps = delay * 3;
         let curSteps = 0;
