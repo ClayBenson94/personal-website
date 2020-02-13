@@ -35,23 +35,23 @@ class Bulb {
         let speed, brightnessPercent;
         switch (patternObj.patternName) {
             case 'rainbow':
-                speed = parseInt(patternObj.speed);
+                speed = Math.min(100, Math.max(parseInt(patternObj.speed), 1));
                 brightnessPercent = parseInt(patternObj.brightnessPercent);
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
-                if (isNaN(speed)) throw new Error(`Error in startPattern(): Brightness Percent "${brightnessPercent}" is not a number`);
+                if (isNaN(brightnessPercent)) throw new Error(`Error in startPattern(): Brightness Percent "${brightnessPercent}" is not a number`);
 
                 this.pattern = patternObj;
                 this.rainbow(speed, brightnessPercent);
                 break;
             case 'pulse':
-                speed = parseInt(patternObj.speed);
+                speed = Math.min(100, Math.max(parseInt(patternObj.speed), 1));
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
 
                 this.pattern = patternObj;
                 this.pulse(speed, patternObj.color);
                 break;
             case 'custom':
-                speed = parseInt(patternObj.speed);
+                speed = Math.min(100, Math.max(parseInt(patternObj.speed), 1));
                 if (isNaN(speed)) throw new Error(`Error in startPattern(): Speed "${speed}" is not a number`);
 
                 this.pattern = patternObj;
@@ -68,8 +68,6 @@ class Bulb {
     }
 
     rainbow(speed, brightnessPercent) {
-        if (speed < 10) speed = 10;
-        if (speed > 100) speed = 100;
         if (brightnessPercent < 1) brightnessPercent = 1;
         if (brightnessPercent > 100) brightnessPercent = 100;
 
@@ -119,8 +117,6 @@ class Bulb {
     }
 
     customColorSet(speed, colorObjArr, smooth) {
-        if (speed < 10) speed = 10;
-        if (speed > 50) speed = 50;
         if (colorObjArr.length < 2) return;
         let from = 0;
         let to = 1;
@@ -153,8 +149,6 @@ class Bulb {
     }
 
     pulse(speed, colorObj) {
-        if (speed < 25) speed = 25;
-        if (speed > 50) speed = 50;
         let maxBrightnessColor = JSON.parse(JSON.stringify(colorObj));
         let minBrightnessColor = {
             r: Math.round(colorObj.r / 5),
