@@ -176,7 +176,7 @@ class CustomModal extends React.Component {
 						return (
 							<ChromePicker
 								color={customColor}
-								onChangeComplete={this.onColorChanged(i)}
+								onChange={this.onColorChanged(i)}
 								className={classes.picker}
 								disableAlpha={true}
 								key={i}

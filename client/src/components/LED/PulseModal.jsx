@@ -108,7 +108,7 @@ class PulseModal extends React.Component {
 				</DialogContent>
 				<ChromePicker
 					color={color}
-					onChangeComplete={this.onColorChanged}
+					onChange={this.onColorChanged}
 					className={classes.picker}
 					disableAlpha={true}
 				/>

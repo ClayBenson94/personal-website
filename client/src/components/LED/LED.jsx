@@ -184,7 +184,7 @@ class LED extends React.Component {
 						<Grid className={classes.gridSpacing} style={boxShadowStyle} item xs={12}>
 							<SketchPicker
 								color={this.bulb.getColor()}
-								onChangeComplete={this.onColorClicked}
+								onChange={this.onColorClicked}
 								disableAlpha={true} />
 						</Grid>
 						<Grid className={classes.gridSpacing} item xs={12}>
