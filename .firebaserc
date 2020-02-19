@@ -1,6 +1,5 @@
 {
   "projects": {
-    "prod": "claybensonme",
-    "default": "claybensonme"
+    "prod": "claybensonme"
   }
 }
