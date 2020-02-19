@@ -4,7 +4,7 @@
   "description": "This is the repository for holding the code for Clay's personal site. Hosted at https://claybenson.me",
   "main": "index.js",
   "scripts": {
-    "postinstall": "(cd ./server && npm install) && (cd ./client && npm install)"
+    "postinstall": "(cd ./server && npm ci) && (cd ./client && npm ci)"
   },
   "repository": {
     "type": "git",
