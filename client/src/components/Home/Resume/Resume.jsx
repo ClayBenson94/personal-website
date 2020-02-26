@@ -65,8 +65,8 @@ function Resume(props) {
 										subtitle="Software Engineer"
 										date="June 2019 - Current"
 										caption="Node.js, MySQL, Docker, and AWS services">
-										Creating and managing login & authentication services for backend systems used
-										by <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.healthcare.gov/">healthcare.gov</a> and <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.mymedicare.gov/">mymedicare.gov</a>
+										Creating, managing, and upgrading login & authentication services
+										for <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.healthcare.gov/">healthcare.gov</a> and <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.mymedicare.gov/">mymedicare.gov</a>
 									</ResumeCard>
 									<ResumeCard
 										title="Ellucian"
