@@ -9,6 +9,5 @@ install:
 script:
   - npm ci
   - (cd client && npm run build)
-after_success:
   - firebase use claybensonme
   - firebase deploy --token $FIREBASE_TOKEN
