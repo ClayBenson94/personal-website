@@ -64,9 +64,8 @@ function Resume(props) {
 										title="Oddball"
 										subtitle="Software Engineer"
 										date="June 2019 - Current"
-										caption="Node.js, MySQL, Docker, and AWS services">
-										Creating, managing, and upgrading login & authentication services
-										for <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.healthcare.gov/">healthcare.gov</a> and <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.mymedicare.gov/">mymedicare.gov</a>
+										caption="Node.js, MySQL, Docker, a handful of AWS services, Terraform, New Relic, Splunk, JMeter... I've learned a lot here :)">
+										Creating and constantly improving login and authentication services for <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.healthcare.gov/">healthcare.gov</a> and <a className={classes.link} target="_blank" rel="noopener noreferrer" href="https://www.mymedicare.gov/">mymedicare.gov</a>. I've had the pleasure of writing features that are scalable and performant enough to handle high load during Open Enrollment periods. Here, I've also learned quite a bit about the value of application metrics and telemetry.
 									</ResumeCard>
 									<ResumeCard
 										title="Ellucian"
