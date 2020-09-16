@@ -10,5 +10,5 @@ script:
   - npm ci
   - (cd client && npm run build)
 after_success:
-  - firebase use default
+  - firebase use claybensonme
   - firebase deploy --token $FIREBASE_TOKEN
