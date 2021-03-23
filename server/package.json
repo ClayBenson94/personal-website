@@ -9,6 +9,6 @@
 		"dotenv": "^8.2.0",
 		"hapi": "^18.1.0",
 		"pi-blaster.js": "^0.1.3",
-		"socket.io": "^2.3.0"
+		"socket.io": "^2.4.1"
 	}
 }
