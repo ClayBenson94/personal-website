@@ -42,7 +42,11 @@ const bulb = new Bulb({ r: 255, g: 180, b: 0 }, setDiodeColor);
 	};
 	const httpsServer = https.createServer(options);
 
-	let io = require('socket.io')(httpsServer);
+	let io = require('socket.io')(httpsServer, {
+		cors: {
+			origin: ['https://claybenson.me', 'http://localhost:3000'],
+		}
+	});
 	httpsServer.listen(8334, '0.0.0.0');
 	const ledSocket = io.of('/led');
 	ledSocket.on('connection', (socket) => {
