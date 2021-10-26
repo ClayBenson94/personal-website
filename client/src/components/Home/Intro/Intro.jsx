@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedin, faTwitch } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -153,10 +153,10 @@ class Intro extends React.Component {
 							<FadeOnStart timeout={timeout} delay={2 * fadeDelayUnit}>
 								<div>
 									<Typography variant="h6" align="center" className={classes.intro} paragraph>
-										I'm a Software Developer.
+										I'm a Software Engineering Lead.
 									</Typography>
 									<Typography variant="h6" align="center" className={classes.intro} paragraph>
-										I enjoy breaking and fixing things.
+										I enjoy deleting code and learning by doing.
 									</Typography>
 								</div>
 							</FadeOnStart>
@@ -179,6 +179,7 @@ class Intro extends React.Component {
 								<Tooltip title="Contact me!"><a href="mailto:contact@claybenson.me" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faEnvelope} /></a></Tooltip>
 								<Tooltip title="GitHub"><a href="https://github.com/ClayBenson94" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faGithub} /></a></Tooltip>
 								<Tooltip title="LinkedIn"><a href="https://www.linkedin.com/in/claybenson94/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLinkedin} /></a></Tooltip>
+								<Tooltip title="Twitch"><a href="https://www.twitch.tv/piercinggoblin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faTwitch} /></a></Tooltip>
 							</div>
 						</FadeOnStart>
 					</div>
