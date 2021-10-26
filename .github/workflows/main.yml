@@ -24,6 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - name: Run npm build
+        run: |
+          npm ci
+          (cd client && npm run build)
 
       - name: GitHub Action for Firebase
         uses: w9jds/firebase-action@v2.0.0
