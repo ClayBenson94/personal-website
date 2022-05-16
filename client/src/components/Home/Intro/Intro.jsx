@@ -7,14 +7,12 @@ import { withStyles } from '@material-ui/core/styles';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faTwitch } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { ArrowDropDown } from '@material-ui/icons'
 import { Parallax } from 'react-parallax';
 import FadeOnStart from '../../UtilComponents/FadeOnStart';
-
-// import './Intro.css'
 
 const styles = theme => ({
 	greeting: {
@@ -180,6 +178,7 @@ class Intro extends React.Component {
 								<Tooltip title="GitHub"><a href="https://github.com/ClayBenson94" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faGithub} /></a></Tooltip>
 								<Tooltip title="LinkedIn"><a href="https://www.linkedin.com/in/claybenson94/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLinkedin} /></a></Tooltip>
 								<Tooltip title="Twitch"><a href="https://www.twitch.tv/piercinggoblin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faTwitch} /></a></Tooltip>
+								<Tooltip title="Control my lights!"><a href="/led" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLightbulb} /></a></Tooltip>
 							</div>
 						</FadeOnStart>
 					</div>

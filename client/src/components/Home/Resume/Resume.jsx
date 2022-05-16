@@ -5,7 +5,7 @@ import ResumeCard from './ResumeCard';
 import { Typography, Grid } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Consumer } from '../../../Context';
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { faSun } from '@fortawesome/free-solid-svg-icons'
 import Fab from '@material-ui/core/Fab';
 
 const styles = (theme) => {
@@ -50,7 +50,7 @@ function Resume(props) {
 				return (
 					<React.Fragment>
 						<Fab className={classes.lightIcon} color="primary" size="small" onClick={context.toggleTheme}>
-							<FontAwesomeIcon icon={faLightbulb} />
+							<FontAwesomeIcon icon={faSun} />
 						</Fab>
 						<div id="about" className={classes.layout}>
 							<Grid container direction="row">
