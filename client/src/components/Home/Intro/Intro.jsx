@@ -178,7 +178,9 @@ class Intro extends React.Component {
 								<Tooltip title="GitHub"><a href="https://github.com/ClayBenson94" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faGithub} /></a></Tooltip>
 								<Tooltip title="LinkedIn"><a href="https://www.linkedin.com/in/claybenson94/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLinkedin} /></a></Tooltip>
 								<Tooltip title="Twitch"><a href="https://www.twitch.tv/piercinggoblin" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faTwitch} /></a></Tooltip>
-								<Tooltip title="Control my lights!"><a href="/led" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLightbulb} /></a></Tooltip>
+								
+								{/* Haven't had this running for a while since I started using HomeAssistant -- might as well comment it out for now :) */}
+								{/* <Tooltip title="Control my lights!"><a href="/led" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className={classNames(classes.icon, 'clickable')} icon={faLightbulb} /></a></Tooltip> */}
 							</div>
 						</FadeOnStart>
 					</div>
