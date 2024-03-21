@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faTwitch } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope, faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { ArrowDropDown } from '@material-ui/icons'
